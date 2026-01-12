@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".MainActivity">
+
+    <SurfaceView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Histogram Placeholder -->
+    <View
+        android:id="@+id/histogram_view"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:background="#80000000"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Histogram"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/histogram_view"
+        app:layout_constraintStart_toStartOf="@id/histogram_view"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"/>
+
+    <!-- Bottom Controls Container -->
+    <LinearLayout
+        android:id="@+id/controls_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#B3000000"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- ISO Control -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="ISO"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
+            <com.google.android.material.slider.Slider
+                android:id="@+id/iso_slider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:valueFrom="100"
+                android:valueTo="3200"
+                android:stepSize="100"
+                app:thumbColor="@color/purple_200"
+                app:trackColorActive="@color/purple_500"
+                app:trackColorInactive="#4DFFFFFF"/>
+        </LinearLayout>
+
+        <!-- Shutter Speed Control -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="Shutter"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
+             <!-- Mapping 1/10000s to 1s roughly log scale logic needed in code, simple linear here for UI -->
+            <com.google.android.material.slider.Slider
+                android:id="@+id/shutter_slider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:valueFrom="0"
+                android:valueTo="100"
+                android:value="50"
+                app:thumbColor="@color/teal_200"
+                app:trackColorActive="@color/teal_700"
+                app:trackColorInactive="#4DFFFFFF"/>
+        </LinearLayout>
+
+        <!-- Focus Control -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="Focus"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"/>
+            <com.google.android.material.slider.Slider
+                android:id="@+id/focus_slider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:valueFrom="0.0"
+                android:valueTo="10.0"
+                android:value="0.0" 
+                app:thumbColor="#FFFFFF"
+                app:trackColorActive="#FFFFFF"
+                app:trackColorInactive="#4DFFFFFF"/>
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/btn_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Record"
+                android:backgroundTint="#D32F2F"
+                android:textColor="#FFFFFF"/>
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"/>
+
+            <ToggleButton
+                android:id="@+id/toggle_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="RAW"
+                android:textOff="YUV"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#1976D2"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
