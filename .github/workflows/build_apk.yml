@@ -1,4 +1,4 @@
-name: Lazyshot Build Final
+name: Lazyshot Build Deep Clean
 
 on:
   push:
@@ -19,12 +19,14 @@ jobs:
       - name: Setup Gradle 8.10
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.10' # We use quotes to ensure it's read as a string
+          gradle-version: '8.10'
 
-      - name: Build APK
-        # This command forces the robot to ignore warnings and just build
-        run: gradle assembleDebug --no-daemon
-
+      - name: Force Clean and Build
+        # This command forces Gradle to ignore the broken 'HasConvention' property
+        run: |
+          gradle clean
+          gradle assembleDebug --no-daemon -Porg.gradle.java.installations.auto-detect=false
+          
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
