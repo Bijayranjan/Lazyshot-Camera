@@ -1,4 +1,4 @@
-name: Android Build
+name: Android Build Fixed
 
 on:
   push:
@@ -9,21 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: set up JDK 17
+      
+      - name: set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
+          
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.10
 
       - name: Build APK
-        # This will attempt to build even if the wrapper is missing
-        run: |
-          if [ ! -f "gradlew" ]; then
-            gradle assembleDebug
-          else
-            chmod +x gradlew
-            ./gradlew assembleDebug
-          fi
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
